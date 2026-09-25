@@ -1,6 +1,6 @@
 ---
 import '../styles/global.css';
-const {title='Studio Orma',description='Studio Orma — spazio indipendente per le arti contemporanee a Roma.'}=Astro.props;
+const {title='Studio Orma',description='Spazio indipendente per le arti contemporanee a Roma.'}=Astro.props;
 ---
 <!doctype html>
 <html lang="it">
@@ -12,26 +12,26 @@ const {title='Studio Orma',description='Studio Orma — spazio indipendente per 
 </head>
 <body>
   <header class="site-header">
-    <a class="orma" href="/" aria-label="Studio Orma home">STUDIO ORMA</a>
+    <a class="orma" href="/">STUDIO ORMA</a>
     <nav aria-label="Navigazione principale">
       <a href="/about">ABOUT</a>
       <a href="/events">MOSTRE ED EVENTI</a>
-      <a href="/journal">ARTICOLI</a>
-      <a href="#contact">CONTATTI</a>
+      <a href="/journal">PRESS</a>
+      <a href="/#contact">CONTATTI</a>
     </nav>
   </header>
   <main><slot/></main>
   <footer id="contact" class="contact">
-    <div class="contact-title">CONTATTACI</div>
+    <div class="contact-title">CONTATTI</div>
     <div class="contact-grid">
       <div>
         <p>Per qualsiasi tipo di richiesta scrivici.<br>Verrai raggiunto a breve da un nostro collaboratore.</p>
         <a class="mail-big" href="mailto:collettivoorma@gmail.com">collettivoorma@gmail.com</a>
       </div>
       <div><strong>CONTATTI</strong><p>Marco: +39 375 577 0117<br>Edoardo: +39 331 769 4025</p></div>
-      <div><strong>STUDIO ORMA</strong><p>Associazione ORMA<br>Via Francesco Amici, 10<br>00152 Roma (RM)<br>Italia</p></div>
+      <div><strong>STUDIO ORMA</strong><p>Associazione ORMA<br>Via Francesco Amici, 10<br>00152 Roma (RM)<br>Italia</p><a class="footer-link" href="https://www.instagram.com/studioorma/" target="_blank" rel="noopener noreferrer">INSTAGRAM ↗</a></div>
     </div>
-    <div class="footer-bottom"><span>© {new Date().getFullYear()} STUDIO ORMA</span><span>ROMA</span></div>
+    <div class="footer-bottom"><span>© {new Date().getFullYear()} STUDIO ORMA</span><a href="https://www.instagram.com/studioorma/" target="_blank" rel="noopener noreferrer">INSTAGRAM</a></div>
   </footer>
 </body>
 </html>
