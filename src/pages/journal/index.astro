@@ -1,0 +1,4 @@
+---
+import Base from '../../layouts/Base.astro'; import {getCollection} from 'astro:content'; const articles=(await getCollection('articles')).sort((a,b)=>b.data.date.valueOf()-a.data.date.valueOf());
+---
+<Base title="Journal — Studio Orma"><header class="archive-head"><div class="eyebrow">Testi / Interviste / Note</div><h1>Journal</h1></header><section class="section">{articles.length?articles.map(a=><a class="event-row" href={`/journal/${a.id}`}><span class="meta">{a.data.date.toLocaleDateString('it-IT')}</span><span class="title">{a.data.title}</span><span class="where">{a.data.author}</span><span>→</span></a>):<p class="empty">Il Journal è pronto: il primo articolo può essere pubblicato dal CMS.</p>}</section></Base>

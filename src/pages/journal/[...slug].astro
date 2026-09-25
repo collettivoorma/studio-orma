@@ -1,0 +1,4 @@
+---
+import Base from '../../layouts/Base.astro'; import {getCollection,render} from 'astro:content'; export async function getStaticPaths(){return (await getCollection('articles')).map(a=>({params:{slug:a.id},props:{a}}))}; const {a}=Astro.props; const {Content}=await render(a);
+---
+<Base title={`${a.data.title} — Studio Orma`}><article class="detail"><div class="eyebrow">Journal · {a.data.date.toLocaleDateString('it-IT')}</div><h1>{a.data.title}</h1>{a.data.cover&&<img src={a.data.cover} alt={a.data.title}/>}<div class="detail-grid"><div class="meta">{a.data.author}</div><div class="content"><Content/></div></div></article></Base>

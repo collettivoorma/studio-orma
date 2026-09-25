@@ -1,0 +1,39 @@
+backend:
+  name: github
+  repo: YOUR_GITHUB_USERNAME/studio-orma
+  branch: main
+media_folder: public/images
+public_folder: /images
+locale: it
+collections:
+  - name: events
+    label: Mostre ed eventi
+    label_singular: Mostra / evento
+    folder: src/content/events
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - {label: Titolo, name: title, widget: string}
+      - {label: Artista, name: artist, widget: string, required: false}
+      - {label: Data inizio, name: start, widget: datetime, time_format: false}
+      - {label: Data fine, name: end, widget: datetime, time_format: false, required: false}
+      - {label: Luogo, name: location, widget: string}
+      - {label: Città, name: city, widget: string, default: Roma}
+      - {label: In evidenza in Home, name: featured, widget: boolean, default: false}
+      - {label: Immagine copertina, name: cover, widget: image, required: false}
+      - {label: Breve descrizione, name: excerpt, widget: text, required: false}
+      - {label: Testo, name: body, widget: markdown}
+      - {label: Galleria, name: gallery, widget: list, required: false, field: {label: Immagine, name: image, widget: image}}
+  - name: articles
+    label: Journal / Articoli
+    label_singular: Articolo
+    folder: src/content/articles
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - {label: Titolo, name: title, widget: string}
+      - {label: Autore, name: author, widget: string, required: false}
+      - {label: Data, name: date, widget: datetime, time_format: false}
+      - {label: Immagine copertina, name: cover, widget: image, required: false}
+      - {label: Breve descrizione, name: excerpt, widget: text, required: false}
+      - {label: Testo, name: body, widget: markdown}

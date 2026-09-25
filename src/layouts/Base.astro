@@ -1,0 +1,5 @@
+---
+import '../styles/global.css';
+const {title='Studio Orma',description='Spazio indipendente per le arti contemporanee a Roma.'}=Astro.props;
+---
+<!doctype html><html lang="it"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width"><meta name="description" content={description}><title>{title}</title></head><body><div class="wrap"><nav class="nav"><a class="brand" href="/">STUDIO ORMA</a><div class="links"><a href="/events">Mostre</a><a href="/journal">Journal</a><a href="/about">About</a><a href="/#contact">Contatti</a></div></nav><slot/><footer id="contact" class="footer"><div><strong>STUDIO ORMA</strong><br><br>Associazione ORMA<br>Via Francesco Amici, 10<br>00152 Roma</div><div>CONTATTI<br><br><a href="mailto:collettivoorma@gmail.com">collettivoorma@gmail.com</a><br>+39 375 577 0117<br>+39 331 769 4025</div><div>SEGUICI<br><br><span>Instagram</span><br><span>Sostienici</span></div></footer></div></body></html>

@@ -1,0 +1,8 @@
+---
+import Base from '../layouts/Base.astro'; import {getCollection} from 'astro:content';
+const events=(await getCollection('events')).sort((a,b)=>b.data.start.valueOf()-a.data.start.valueOf()); const featured=events.find(x=>x.data.featured)||events[0];
+---
+<Base>{featured && <section class="hero"><div><div class="eyebrow">In mostra ora</div><h1>{featured.data.title}</h1></div><div class="hero-copy"><div class="meta">{featured.data.artist} · {featured.data.city}</div><p>{featured.data.excerpt}</p><a class="cta" href={`/events/${featured.id}`}>Scopri la mostra →</a></div></section>}
+<section class="section"><div class="section-title"><h2>Mostre & eventi</h2><a class="cta" href="/events">Archivio completo</a></div>{events.slice(0,6).map(e=><a class="event-row" href={`/events/${e.id}`}><span class="meta">{e.data.start.toLocaleDateString('it-IT',{day:'2-digit',month:'2-digit'})}</span><span class="title">{e.data.title}</span><span class="where">{e.data.artist||e.data.location}</span><span class="year">{e.data.start.getFullYear()} →</span></a>)}</section>
+<section class="section about-grid"><p class="bigtext">Uno spazio indipendente per artisti, idee e linguaggi contemporanei.</p><div class="prose"><p>Studio Orma nasce da un progetto di Marco Celentani ed Edoardo Innaro per promuovere una rete di collaborazioni tra giovani creativi, con un programma espositivo attento alla nuova generazione di artisti.</p><a class="cta" href="/about">La nostra storia →</a></div></section>
+</Base>

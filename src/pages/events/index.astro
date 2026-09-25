@@ -1,0 +1,4 @@
+---
+import Base from '../../layouts/Base.astro'; import {getCollection} from 'astro:content'; const events=(await getCollection('events')).sort((a,b)=>b.data.start.valueOf()-a.data.start.valueOf());
+---
+<Base title="Mostre — Studio Orma"><header class="archive-head"><div class="eyebrow">Programma / Archivio</div><h1>Mostre</h1></header><section class="section">{events.map(e=><a class="event-row" href={`/events/${e.id}`}><span class="meta">{e.data.start.toLocaleDateString('it-IT',{day:'2-digit',month:'2-digit'})}</span><span class="title">{e.data.title}</span><span class="where">{e.data.artist||e.data.location}</span><span class="year">{e.data.start.getFullYear()} →</span></a>)}</section></Base>
