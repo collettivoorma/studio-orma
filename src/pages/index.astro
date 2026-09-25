@@ -3,6 +3,7 @@ import Base from '../layouts/Base.astro';
 import { getCollection } from 'astro:content';
 const events = (await getCollection('events')).sort((a,b)=>b.data.start.valueOf()-a.data.start.valueOf());
 const fmt = (d:Date) => d.toLocaleDateString('it-IT',{day:'2-digit',month:'2-digit',year:'numeric'});
+const fontClass = (f?:string) => `title-font-${f || 'default'}`;
 ---
 <Base>
   <section class="showcase" aria-label="Mostre recenti">
@@ -12,7 +13,7 @@ const fmt = (d:Date) => d.toLocaleDateString('it-IT',{day:'2-digit',month:'2-dig
         <div class="slide-shade"></div>
         <div class="slide-copy">
           <div class="slide-kicker">{e.data.artist || 'Studio Orma'}</div>
-          <h1>{e.data.title}</h1>
+          <h1 class={fontClass(e.data.titleFont)}>{e.data.title}</h1>
           <div class="slide-bottom"><span>{fmt(e.data.start)}</span><span>{e.data.location} · {e.data.city}</span><a href={`/events/${e.id}`}>VAI ALL'EVENTO ↗</a></div>
         </div>
       </article>)}
@@ -23,28 +24,24 @@ const fmt = (d:Date) => d.toLocaleDateString('it-IT',{day:'2-digit',month:'2-dig
       <button class="slider-next" aria-label="Mostra successiva">→</button>
     </div>
   </section>
-
   <section class="wix-section about-home">
     <div class="section-label">CHI SIAMO</div>
     <div class="about-copy"><p>Studio Orma nasce da un progetto di Marco Celentani ed Edoardo Innaro il cui obiettivo è promuovere una rete di collaborazioni tra giovani creativi attivi in diversi ambiti, con un programma espositivo incentrato sulla nuova generazione di artisti under 30.</p><p>Il nome richiama un’idea arcaica di traccia, mentre lo spazio invita a interrogarsi sui limiti fisici ed espressivi di una stanza, privilegiando progetti site specific capaci di trasformarne la percezione.</p><a class="line-link" href="/about">LA NOSTRA STORIA →</a></div>
   </section>
-
   <section class="wix-section events-home">
     <div class="section-head"><div class="section-label">MOSTRE ED EVENTI</div><a class="line-link" href="/events">VEDI TUTTE →</a></div>
     <div class="event-grid">
       {events.map(e => <a class="event-card" href={`/events/${e.id}`}>
         <div class="event-image">{e.data.cover ? <img src={e.data.cover} alt={e.data.title}/> : <div class="event-noimage">STUDIO ORMA</div>}</div>
-        <div class="event-info"><h2>{e.data.title}</h2><p>{fmt(e.data.start)}</p><p>{e.data.location}</p><span>Scopri di più →</span></div>
+        <div class="event-info"><h2 class={fontClass(e.data.titleFont)}>{e.data.title}</h2><p>{fmt(e.data.start)}</p><p>{e.data.location}</p><span>Scopri di più →</span></div>
       </a>)}
     </div>
   </section>
-
   <section class="wix-section journal-home">
     <div class="section-head"><div class="section-label">JOURNAL</div><a class="line-link" href="/journal">ARTICOLI →</a></div>
     <p class="journal-intro">Testi, approfondimenti e conversazioni intorno alle mostre e alla ricerca degli artisti.</p>
   </section>
-
   <script is:inline>
-    (()=>{const slides=[...document.querySelectorAll('.slide')]; if(!slides.length)return; let i=0; const counter=document.getElementById('slideCurrent'); const show=n=>{i=(n+slides.length)%slides.length;slides.forEach((s,j)=>s.classList.toggle('active',j===i));if(counter)counter.textContent=String(i+1).padStart(2,'0')};document.querySelector('.slider-next')?.addEventListener('click',()=>show(i+1));document.querySelector('.slider-prev')?.addEventListener('click',()=>show(i-1));let timer=setInterval(()=>show(i+1),6500);document.querySelector('.showcase')?.addEventListener('mouseenter',()=>clearInterval(timer));})();
+    (()=>{const slides=[...document.querySelectorAll('.slide')];if(!slides.length)return;let i=0,timer;const counter=document.getElementById('slideCurrent');const show=n=>{i=(n+slides.length)%slides.length;slides.forEach((s,j)=>s.classList.toggle('active',j===i));if(counter)counter.textContent=String(i+1).padStart(2,'0')};const start=()=>{clearInterval(timer);timer=setInterval(()=>show(i+1),10000)};const stop=()=>clearInterval(timer);document.querySelector('.slider-next')?.addEventListener('click',()=>{show(i+1);start()});document.querySelector('.slider-prev')?.addEventListener('click',()=>{show(i-1);start()});const showcase=document.querySelector('.showcase');showcase?.addEventListener('mouseenter',stop);showcase?.addEventListener('mouseleave',start);start();})();
   </script>
 </Base>

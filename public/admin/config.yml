@@ -26,6 +26,18 @@ collections:
       - {label: Città, name: city, widget: string, default: Roma}
       - {label: In evidenza in Home, name: featured, widget: boolean, default: false}
       - {label: Immagine copertina, name: cover, widget: image, required: false}
+      - label: Font titolo
+        name: titleFont
+        widget: select
+        required: false
+        default: default
+        options:
+          - {label: Default (Inter), value: default}
+          - {label: Oswald, value: oswald}
+          - {label: Cormorant Garamond, value: cormorant}
+          - {label: EB Garamond, value: ebgaramond}
+          - {label: Space Grotesk, value: space}
+          - {label: Archivo Black, value: archivo}
       - {label: Breve descrizione, name: excerpt, widget: text, required: false}
       - {label: Testo, name: body, widget: markdown}
       - {label: Galleria, name: gallery, widget: list, required: false, field: {label: Immagine, name: image, widget: image}}
