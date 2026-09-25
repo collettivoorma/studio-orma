@@ -1,5 +1,5 @@
 ---
-title: So close so far
+title: So Close So Far
 artist: Hamid Hoveyda
 start: 2026-09-24
 end: 2026-10-14
