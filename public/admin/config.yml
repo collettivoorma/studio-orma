@@ -1,7 +1,12 @@
 backend:
-  name: github
-  repo: YOUR_GITHUB_USERNAME/studio-orma
+  name: git-gateway
+  repo: collettivoorma/studio-orma
   branch: main
+  auth_type: pkce
+  base_url: https://auth.decapbridge.com
+  auth_endpoint: /sites/7e5ab1fb-f271-440f-b808-484495461b4b/pkce
+  auth_token_endpoint: /sites/7e5ab1fb-f271-440f-b808-484495461b4b/token
+  gateway_url: https://gateway.decapbridge.com
 media_folder: public/images
 public_folder: /images
 locale: it
