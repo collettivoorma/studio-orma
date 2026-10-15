@@ -4,30 +4,25 @@ import {getCollection,render} from 'astro:content';
 export async function getStaticPaths(){return (await getCollection('events')).map(e=>({params:{slug:e.id},props:{e}}))}
 const {e}=Astro.props;
 const {Content}=await render(e);
+const {start,end}=e.data;
+const full={day:'numeric',month:'long',year:'numeric'} as const;
+const sameYear=end && end.getFullYear()===start.getFullYear();
+const dates=end && end.getTime()!==start.getTime()
+  ? `${start.toLocaleDateString('it-IT',sameYear?{day:'numeric',month:'long'}:full)} — ${end.toLocaleDateString('it-IT',full)}`
+  : start.toLocaleDateString('it-IT',full);
 ---
 <Base title={`${e.data.title} — Studio Orma`} description={e.data.excerpt}>
   <article class="detail event-detail">
-    <div class="eyebrow">Mostra / Evento</div>
-    <h1>{e.data.title}</h1>
-    <div class="event-row">
-      <span class="meta">{e.data.start.toLocaleDateString('it-IT')}</span>
-      <span class="title">{e.data.artist}</span>
-      <span class="where">{e.data.location}, {e.data.city}</span>
-      <span class="year">{e.data.start.getFullYear()}</span>
-    </div>
+    <header class="event-header">
+      <h1 class={`title-font-${e.data.titleFont || 'default'}`}>{e.data.title}</h1>
+      {e.data.artist && <p class="event-artist">{e.data.artist}</p>}
+      <p class="event-dates">{dates}</p>
+      <p class="event-place">{e.data.location}, {e.data.city}</p>
+    </header>
 
     {e.data.cover && <section class="event-main-media"><img src={e.data.cover} alt={e.data.title} /></section>}
 
-    <section class="event-curatorial">
-      <div class="event-section-label">DESCRIZIONE CURATORIALE</div>
-      <div class="detail-grid">
-        <div class="meta">
-          {e.data.start.toLocaleDateString('it-IT')} {e.data.end && <>— {e.data.end.toLocaleDateString('it-IT')}</>}<br/><br/>
-          {e.data.location}<br/>{e.data.city}
-        </div>
-        <div class="content"><Content/></div>
-      </div>
-    </section>
+    <section class="event-description content"><Content/></section>
 
     {e.data.gallery?.length > 0 && <section class="event-gallery">
       <div class="event-section-label">GALLERIA MEDIA</div>
