@@ -1,8 +1,8 @@
 ---
 title: CLASH
 artist: BCMA Berlin x Studio Orma
-start: 2026-10-22T00:00:00.000+02:00
-end: 2026-11-05T00:00:00.000+01:00
+start: 2026-10-23T00:00:00.000+02:00
+end: 2026-11-06T00:00:00.000+01:00
 location: Studio Orma
 city: Roma
 featured: true
