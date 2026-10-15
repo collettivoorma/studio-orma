@@ -9,7 +9,12 @@ featured: true
 cover: /images/hamid_test.jpeg
 excerpt: Prima mostra personale in Italia di Hamid Hoveyda, artista che vive e
   lavora tra Napoli e Bruxelles.
-gallery: []
+gallery:
+  - /images/so-close-so-far/so-close-so-far-1.jpg
+  - /images/so-close-so-far/so-close-so-far-2.jpg
+  - /images/so-close-so-far/so-close-so-far-3.jpg
+  - /images/so-close-so-far/so-close-so-far-4.jpg
+  - /images/so-close-so-far/so-close-so-far-5.jpg
 ---
 Studio Orma inaugura la stagione 2026 – 2027 con la prima mostra personale in Italia di Hamid Hoveyda. Nato a Tehran nel 1967, l'artista vive e lavora tra Napoli e Bruxelles
 
