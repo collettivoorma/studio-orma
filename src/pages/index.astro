@@ -9,8 +9,9 @@ const fontClass = (f?:string) => `title-font-${f || 'default'}`;
   <section class="showcase" aria-label="Mostre recenti">
     <div class="slides">
       {events.map((e,i) => <article class:list={["slide", {active:i===0}]} data-slide={i}>
-        {e.data.cover ? <img src={e.data.cover} alt={e.data.title} /> : <div class="slide-placeholder"></div>}
+        {(e.data.homeCover || e.data.cover) ? <img src={e.data.homeCover || e.data.cover} alt={e.data.title} /> : <div class="slide-placeholder"></div>}
         <div class="slide-shade"></div>
+        <a class="slide-link" href={`/events/${e.id}`} aria-label={`Vai all'evento ${e.data.title}`} tabindex="-1"></a>
         <div class="slide-copy">
           <div class="slide-kicker">{e.data.artist || 'Studio Orma'}</div>
           <h1 class={fontClass(e.data.titleFont)}>{e.data.title}</h1>
@@ -19,9 +20,9 @@ const fontClass = (f?:string) => `title-font-${f || 'default'}`;
       </article>)}
     </div>
     <div class="slider-ui">
-      <button class="slider-prev" aria-label="Mostra precedente">←</button>
+      <button class="slider-prev" aria-label="Mostra precedente"><svg viewBox="0 0 32 16" width="32" height="16" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"><path d="M31 8H1M8 1L1 8l7 7"/></svg></button>
       <div class="slider-count"><span id="slideCurrent">01</span> / {String(events.length).padStart(2,'0')}</div>
-      <button class="slider-next" aria-label="Mostra successiva">→</button>
+      <button class="slider-next" aria-label="Mostra successiva"><svg viewBox="0 0 32 16" width="32" height="16" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"><path d="M1 8h30M24 1l7 7-7 7"/></svg></button>
     </div>
   </section>
   <section class="wix-section about-home">
@@ -33,7 +34,7 @@ const fontClass = (f?:string) => `title-font-${f || 'default'}`;
     <div class="section-head"><div class="section-label">MOSTRE ED EVENTI</div><a class="line-link" href="/events">VEDI TUTTE →</a></div>
     <div class="event-grid">
       {events.map(e => <a class="event-card" href={`/events/${e.id}`}>
-        <div class="event-image">{e.data.cover ? <img src={e.data.cover} alt={e.data.title}/> : <div class="event-noimage">STUDIO ORMA</div>}</div>
+        <div class="event-image">{(e.data.homeCover || e.data.cover) ? <img src={e.data.homeCover || e.data.cover} alt={e.data.title}/> : <div class="event-noimage">STUDIO ORMA</div>}</div>
         <div class="event-info"><h2 class={fontClass(e.data.titleFont)}>{e.data.title}</h2><p>{fmt(e.data.start)}</p><p>{e.data.location}</p><span>Scopri di più →</span></div>
       </a>)}
     </div>

@@ -6,7 +6,7 @@ end: 2026-11-06T00:00:00.000+01:00
 location: Studio Orma
 city: Roma
 featured: true
-cover: /images/clash-6-.jpg
+cover: /images/clash-cover.jpg
 titleFont: default
 excerpt: ""
 ---

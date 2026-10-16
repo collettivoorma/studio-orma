@@ -26,6 +26,7 @@ collections:
       - {label: Città, name: city, widget: string, default: Roma}
       - {label: In evidenza in Home, name: featured, widget: boolean, default: false}
       - {label: Immagine copertina, name: cover, widget: image, required: false}
+      - {label: Immagine in Home (opzionale), name: homeCover, widget: image, required: false}
       - label: Font titolo
         name: titleFont
         widget: select

@@ -13,6 +13,8 @@ const events = defineCollection({
     location: z.string(),
     city: z.string().default('Roma'),
     cover: z.string().optional(),
+    // optional image used only on the homepage (slider and cards) instead of cover
+    homeCover: z.string().optional(),
     featured: z.boolean().default(false),
     excerpt: z.string().optional(),
     titleFont,
