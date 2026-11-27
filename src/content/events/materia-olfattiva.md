@@ -7,6 +7,7 @@ location: "Studio Orma"
 city: "Roma"
 featured: true
 cover: /images/materia-olfattiva.jpg
+homeCover: /images/materia-olfattiva-home.jpg
 titleFont: default
 excerpt: "Introduzione alla profumeria: dalle materie prime alla composizione. Di Alessandro Baldacci."
 price: "35 €"
