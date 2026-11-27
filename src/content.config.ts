@@ -19,6 +19,10 @@ const events = defineCollection({
     excerpt: z.string().optional(),
     titleFont,
     gallery: z.array(z.string()).default([]),
+    // optional practical info + tickets
+    time: z.string().optional(),                                 // e.g. "15:00 — 18:00"
+    price: z.union([z.string(), z.number()]).optional(),          // e.g. "35 €" or 35
+    ticketUrl: z.string().optional(),                             // checkout link (PayPal / Stripe payment link)
   }),
 });
 

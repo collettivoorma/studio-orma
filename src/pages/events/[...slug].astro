@@ -10,14 +10,37 @@ const sameYear=end && end.getFullYear()===start.getFullYear();
 const dates=end && end.getTime()!==start.getTime()
   ? `${start.toLocaleDateString('it-IT',sameYear?{day:'numeric',month:'long'}:full)} — ${end.toLocaleDateString('it-IT',full)}`
   : start.toLocaleDateString('it-IT',full);
+
+// tickets
+const price = typeof e.data.price === 'number' ? `${e.data.price} €` : e.data.price?.trim();
+const ticketUrl = e.data.ticketUrl?.trim();
+const hasTickets = Boolean(price || ticketUrl);
+// sales close at the end of the (last) event day, Rome time (~23:00 UTC)
+const closeAt = new Date((end ?? start).getTime() + 23*3600*1000);
+const isPast = Date.now() > closeAt.getTime();
+const mailto = `mailto:collettivoorma@gmail.com?subject=${encodeURIComponent(`Prenotazione — ${e.data.title}`)}`;
 ---
 <Base title={`${e.data.title} — Studio Orma`} description={e.data.excerpt}>
   <article class="detail event-detail">
     <header class="event-header">
       <h1 class={`title-font-${e.data.titleFont || 'default'}`}>{e.data.title}</h1>
       {e.data.artist && <p class="event-artist">{e.data.artist}</p>}
-      <p class="event-dates">{dates}</p>
+      <p class="event-dates">{dates}{e.data.time && <span class="event-time"> · {e.data.time}</span>}</p>
       <p class="event-place">{e.data.location}, {e.data.city}</p>
+
+      {hasTickets && <div class:list={["event-ticket", {"is-closed": isPast}]} data-close-after={closeAt.toISOString()}>
+        {price && <div class="event-price">
+          <span class="event-ticket-label">Biglietto</span>
+          <span class="event-price-value">{price}</span>
+        </div>}
+        <div class="event-ticket-action">
+          {ticketUrl
+            ? <a class="ticket-button" href={ticketUrl} target="_blank" rel="noopener noreferrer">Acquista il biglietto <span aria-hidden="true">↗</span></a>
+            : <a class="ticket-button ticket-button-outline" href={mailto}>Prenota via email <span aria-hidden="true">→</span></a>}
+          {ticketUrl && <p class="ticket-note">Pagamento sicuro con carta, Apple Pay o PayPal</p>}
+          <p class="ticket-closed">Evento concluso</p>
+        </div>
+      </div>}
     </header>
 
     {e.data.cover && <section class="event-main-media"><img src={e.data.cover} alt={e.data.title} /></section>}
@@ -31,4 +54,10 @@ const dates=end && end.getTime()!==start.getTime()
       </div>
     </section>}
   </article>
+  {hasTickets && <script is:inline>
+    /* the site is static: if it hasn't been rebuilt since the event, close sales in the browser */
+    document.querySelectorAll('.event-ticket[data-close-after]').forEach(el=>{
+      if(Date.now()>Date.parse(el.dataset.closeAfter)) el.classList.add('is-closed');
+    });
+  </script>}
 </Base>

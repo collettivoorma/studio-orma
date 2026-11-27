@@ -22,6 +22,9 @@ collections:
       - {label: Artista, name: artist, widget: string, required: false}
       - {label: Data inizio, name: start, widget: datetime, time_format: false}
       - {label: Data fine, name: end, widget: datetime, time_format: false, required: false}
+      - {label: Orario (opzionale), name: time, widget: string, required: false, hint: "Es. 15:00 — 18:00"}
+      - {label: Prezzo biglietto (opzionale), name: price, widget: string, required: false, hint: "Es. 35 €. Lascia vuoto per eventi gratuiti"}
+      - {label: Link acquisto biglietto (opzionale), name: ticketUrl, widget: string, required: false, hint: "Incolla il link di pagamento PayPal (o Stripe). Se vuoto ma c'è un prezzo, compare 'Prenota via email'"}
       - {label: Luogo, name: location, widget: string}
       - {label: Città, name: city, widget: string, default: Roma}
       - {label: In evidenza in Home, name: featured, widget: boolean, default: false}
